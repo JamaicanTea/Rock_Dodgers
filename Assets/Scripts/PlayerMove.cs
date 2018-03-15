@@ -17,14 +17,14 @@ public class PlayerMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update () //movement script
 	{
 		if (Input.GetKey (KeyCode.W)) 
 		{
-			rb.velocity = Vector3.forward * moveSpeed * Time.deltaTime * 60;
+			rb.velocity = Vector3.forward * moveSpeed * Time.deltaTime * 60;// moves player at the direction and activates bool
 			moveForward = true;
 		}
-		else if (Input.GetKeyUp (KeyCode.W)) 
+		else if (Input.GetKeyUp (KeyCode.W))// removes bool for animation
 		{
 			moveForward = false;
 		}
@@ -62,6 +62,10 @@ public class PlayerMove : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space) && moveForward == true) 
 		{
 			anim.SetTrigger("RollNow");
+		}
+		if (Input.GetKeyDown (KeyCode.Space) && moveSides == true) 
+		{
+			anim.SetTrigger("RollSideNow");
 		}
 
 	}

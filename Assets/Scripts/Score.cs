@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
-	public float score = 0;
-	public float scoreInc = 100;
+	public float score = 0f;
+	public float scoreInc = 10f;
 	public Text scoreText;
 
 
@@ -18,13 +18,12 @@ public class Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		score = Time.time * scoreInc;
+		score += Time.deltaTime * scoreInc;
 		DisplayScore ();
 	}
 
 	void DisplayScore ()
 	{
-		scoreText.text = "Score :" + score;
-		score.ToString ("####");
+		scoreText.text = "Score :" + score.ToString("#####");
 	}
 }
