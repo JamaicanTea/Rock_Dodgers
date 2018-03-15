@@ -391,7 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  anim: {fileID: 0}
+  moveForward: 0
+  moveSides: 0
 --- !u!54 &1048345785
 Rigidbody:
   m_ObjectHideFlags: 0
