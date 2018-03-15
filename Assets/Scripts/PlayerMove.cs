@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour {
 	public float moveSpeed = 1000f;
 	Rigidbody rb;
+	Animator anim;
 
 	// Use this for initialization
 	void Start () 
 	{
 		rb = GetComponent<Rigidbody> ();
+		anim = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +32,10 @@ public class PlayerMove : MonoBehaviour {
 		if (Input.GetKey (KeyCode.D)) 
 		{
 			rb.velocity = Vector3.right * moveSpeed * Time.deltaTime * 60;
+		}
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			anim.SetTrigger("RollNow");
 		}
 
 	}
