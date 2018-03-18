@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfb84a1ed4cf4243814588bc7336fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 15
   moveForward: 0
   moveSides: 0
   moveBonus: 10
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1771345445942674, guid: 27958d549a36d8e498a416a3069d3ad3, type: 2}
   shootingPanel: {fileID: 1265736938}
-  projSpeed: 10
+  projSpeed: 100
   shootTime: 0
   shootDelay: 2
 --- !u!4 &1265736940
