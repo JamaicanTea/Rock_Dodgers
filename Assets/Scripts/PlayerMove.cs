@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour {
 	public float moveSpeed = 1000f;
@@ -9,13 +10,21 @@ public class PlayerMove : MonoBehaviour {
 	public bool moveForward = false;
 	public bool moveSides = false;
 	public float moveBonus = 300f;
+	public int lives = 3;
 	Coroutine co;
+	public GameObject gameOver;
+	public GameObject menuButton;
+	public GameObject retryButton;
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		rb = GetComponent<Rigidbody> ();
 		anim = GetComponent<Animator> ();
+		gameOver.gameObject.SetActive (false);
+		menuButton.gameObject.SetActive (false);
+		retryButton.gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -72,8 +81,24 @@ public class PlayerMove : MonoBehaviour {
 			anim.SetTrigger("RollSideNow");
 			co = StartCoroutine (SpeedBoost ());
 		}
+		if (lives == 0) 
+		{
+			gameOver.gameObject.SetActive (true);
+			menuButton.gameObject.SetActive (true);
+			retryButton.gameObject.SetActive (true);
+			Time.timeScale = 0;
+		}
 
 
+
+	}
+
+	void OnTriggerEnter (Collider player) 
+	{
+		if (player.CompareTag ("Projectile")) 
+		{
+			lives--;
+		}
 	}
 
 	IEnumerator SpeedBoost()
