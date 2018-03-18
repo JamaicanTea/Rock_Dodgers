@@ -8,6 +8,8 @@ public class PlayerMove : MonoBehaviour {
 	Animator anim;
 	public bool moveForward = false;
 	public bool moveSides = false;
+	public float moveBonus = 300f;
+	Coroutine co;
 
 	// Use this for initialization
 	void Start () 
@@ -62,11 +64,24 @@ public class PlayerMove : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space) && moveForward == true) 
 		{
 			anim.SetTrigger("RollNow");
+			co = StartCoroutine (SpeedBoost ());
+
 		}
 		if (Input.GetKeyDown (KeyCode.Space) && moveSides == true) 
 		{
 			anim.SetTrigger("RollSideNow");
+			co = StartCoroutine (SpeedBoost ());
 		}
 
+
+	}
+
+	IEnumerator SpeedBoost()
+	{
+		moveSpeed = moveSpeed+moveBonus;
+		yield return new WaitForSeconds (3.5f);
+		moveSpeed = moveSpeed-moveBonus;
+
+		co = null;
 	}
 }
