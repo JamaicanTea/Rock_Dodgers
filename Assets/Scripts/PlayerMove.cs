@@ -15,13 +15,19 @@ public class PlayerMove : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject menuButton;
 	public GameObject retryButton;
+	public Text lifeDisplay;
 
 
 	// Use this for initialization
+	void Awake ()
+	{
+		Time.timeScale = 1;
+	}
 	void Start () 
 	{
 		rb = GetComponent<Rigidbody> ();
 		anim = GetComponent<Animator> ();
+		lifeDisplay.text = "Lives: " + lives;
 		gameOver.gameObject.SetActive (false);
 		menuButton.gameObject.SetActive (false);
 		retryButton.gameObject.SetActive (false);
@@ -98,7 +104,13 @@ public class PlayerMove : MonoBehaviour {
 		if (player.CompareTag ("Projectile")) 
 		{
 			lives--;
+			UpdateLifeDisplay ();
 		}
+	}
+
+	void UpdateLifeDisplay ()
+	{
+		lifeDisplay.text = "Lives: " + lives;
 	}
 
 	IEnumerator SpeedBoost()

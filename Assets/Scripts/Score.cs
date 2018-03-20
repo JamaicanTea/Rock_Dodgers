@@ -7,6 +7,7 @@ public class Score : MonoBehaviour {
 	public float score = 0f;
 	public float scoreInc = 10f;
 	public Text scoreText;
+	public GameObject horiShooter;
 
 
 	// Use this for initialization
@@ -20,6 +21,11 @@ public class Score : MonoBehaviour {
 	{
 		score += Time.deltaTime * scoreInc;
 		DisplayScore ();
+		if (score > 100) 
+		{
+			horiShooter.gameObject.SetActive (true);
+		}
+	
 	}
 
 	void DisplayScore ()
