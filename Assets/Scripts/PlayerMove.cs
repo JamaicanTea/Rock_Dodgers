@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour {
 	public GameObject menuButton;
 	public GameObject retryButton;
 	public Text lifeDisplay;
+	Coroutine invuln;
+	public CapsuleCollider collie;
 
 
 	// Use this for initialization
@@ -25,6 +27,7 @@ public class PlayerMove : MonoBehaviour {
 	}
 	void Start () 
 	{
+		collie = GetComponent<CapsuleCollider> ();
 		rb = GetComponent<Rigidbody> ();
 		anim = GetComponent<Animator> ();
 		lifeDisplay.text = "Lives: " + lives;
@@ -81,11 +84,13 @@ public class PlayerMove : MonoBehaviour {
 			anim.SetTrigger("RollNow");
 			co = StartCoroutine (SpeedBoost ());
 
+
 		}
 		if (Input.GetKeyDown (KeyCode.Space) && moveSides == true) 
 		{
 			anim.SetTrigger("RollSideNow");
 			co = StartCoroutine (SpeedBoost ());
+
 		}
 		if (lives == 0) 
 		{
@@ -105,6 +110,7 @@ public class PlayerMove : MonoBehaviour {
 		{
 			lives--;
 			UpdateLifeDisplay ();
+			invuln = StartCoroutine (Invulnerability());
 		}
 	}
 
@@ -120,5 +126,15 @@ public class PlayerMove : MonoBehaviour {
 		moveSpeed = moveSpeed-moveBonus;
 
 		co = null;
+	}
+	IEnumerator Invulnerability ()
+	{
+		collie.enabled = false;
+		rb.useGravity = false;
+		print ("ow!");
+		yield return new WaitForSeconds (1.5f);
+		print ("k im fine!");
+		collie.enabled = true;
+		rb.useGravity = true;
 	}
 }
